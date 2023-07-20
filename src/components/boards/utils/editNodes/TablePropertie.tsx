@@ -1,5 +1,5 @@
 import { Cross2Icon } from "@radix-ui/react-icons"
-import { ChangeEvent, useEffect, useState } from "react"
+import { ChangeEvent, useEffect, useRef, useState } from "react"
 
 interface TablePropertieProp {
   id: string
@@ -18,6 +18,14 @@ export type PropertyType = {
 function TablePropertie({ id, onRemovePropertie, onPropretyChange, defaultName, defaultType }: TablePropertieProp) {
   const [columnName, setColumnName] = useState(defaultName ?? '')
   const [columnType, setColumnType] = useState(defaultType ?? '')
+
+  const myInputRef = useRef<HTMLInputElement>(null);
+
+  useEffect(() => {
+    if (myInputRef.current) {
+      myInputRef.current.focus();
+    }
+  }, []);
 
   useEffect(() => {
     const change = { id: id, columnName: columnName, columnType: columnType } satisfies PropertyType
@@ -43,7 +51,7 @@ function TablePropertie({ id, onRemovePropertie, onPropretyChange, defaultName, 
         onClick={() => onRemovePropertie(id)}>
         <Cross2Icon />
       </div>
-      <input className={propertieClass} onChange={handleNameChange} defaultValue={columnName} />
+      <input className={propertieClass} ref={myInputRef} onChange={handleNameChange} defaultValue={columnName} />
       <input className={propertieClass} onChange={handleTypeChange} defaultValue={columnType} />
     </div>
   )

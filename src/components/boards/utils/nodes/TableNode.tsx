@@ -41,7 +41,7 @@ const TableNode = ({ selected, id, dragging, data, xPos, yPos }: NodeProps) => {
   const squareNameClass = `text-center bg-transparent border border-b-0 border-t-0 ${inputName === '' ? ' border-white' : 'border-transparent'}  outline-none text-3x1 text-bold`
 
   return (
-    <div id={id} className='bg-violet-500 rounded-2xl w-full h-full min-w-[200px] min-h-[100px] node flex items-center justify-center text-white font-bold p-4 relative'
+    <div id={id} className={`bg-violet-500 rounded-2xl w-full h-full min-w-[200px] min-h-[100px] node flex items-center justify-center text-white font-bold p-4 relative hover:bg-violet-700 ${selected ? "bg-violet-700" : ""}`}
       onMouseEnter={() => { setHovered(true) }}
       onMouseLeave={() => { setHovered(false) }}>
       <TableControll id={id} onRemove={data.onRemoveNode} visible={hovered && !dragging} />

@@ -10,7 +10,6 @@ interface TablePropertiesProp {
 
 export default function TablePropertiesControll({ visible, onPropertyChange, defaultProperties }: TablePropertiesProp) {
   const canView = visible ? visible : false
-  const tablePropertiescClassname = `bg-white absolute left-1/2 -translate-x-1/2 top-full translate-y-4 flex items-center flex-col shadow-lg border-0 rounded-2x1 ${canView ? '' : 'hidden'}`
 
   const [properties, setProperties] = useState<PropertyType[]>(defaultProperties || [])
 
@@ -20,6 +19,7 @@ export default function TablePropertiesControll({ visible, onPropertyChange, def
       { id: crypto.randomUUID() }
     ])
     onPropertyChange(properties)
+    const lastPropertie = properties[properties.length - 1]
   }
 
   function handlePropertyChange(change: PropertyType) {
@@ -41,10 +41,16 @@ export default function TablePropertiesControll({ visible, onPropertyChange, def
   }
 
   return (
-    <div className={tablePropertiescClassname}>
+    <div className={`bg-white absolute left-1/2 -translate-x-1/2 top-full translate-y-4 flex items-center flex-col shadow-lg border-0 rounded-2x1 ${canView ? '' : 'hidden'}`}>
       <div className='properties'>
-        {properties?.map(propertie => {
-          return <TablePropertie onRemovePropertie={onRemovePropertie} id={propertie.id} key={propertie.id} onPropretyChange={handlePropertyChange} defaultName={propertie.columnName} defaultType={propertie.columnType}/>
+        {properties?.map((propertie, i) => {
+          return <TablePropertie
+            id={propertie.id}
+            key={propertie.id}
+            onRemovePropertie={onRemovePropertie}
+            onPropretyChange={handlePropertyChange}
+            defaultName={propertie.columnName}
+            defaultType={propertie.columnType} />
         })}
       </div>
       <div>
