@@ -51,6 +51,11 @@ const TableNode = ({ selected, id, dragging, data, xPos, yPos }: NodeProps) => {
         isVisible={selected}
         minWidth={200}
         minHeight={100} />
+      <div className='top-2 h-3 w-[80%]  absolute flex items-center'>
+        {properties.map(_ => (
+          <span className='h-2 w-2 bg-white rounded-full mr-2'></span>
+        ))}
+      </div>
 
       <CustomHandle position={Position.Right} visible={selected || hovered} />
       <CustomHandle position={Position.Left} visible={selected || hovered} />

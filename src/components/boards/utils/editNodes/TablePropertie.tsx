@@ -39,7 +39,7 @@ function TablePropertie({ id, onRemovePropertie, onPropretyChange, defaultName, 
   return (
     <div className="flex flex-row items-center">
       <div
-        className="w-[12px] h-[12px] -translate-y-[5.5px] rounded-full text-red-300 flex items-center justify-center shadow-md"
+        className="w-[12px] h-[12px] -translate-y-[5.5px] rounded-full text-red-300 flex items-center justify-center shadow-md cursor-pointer"
         onClick={() => onRemovePropertie(id)}>
         <Cross2Icon />
       </div>

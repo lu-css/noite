@@ -35,7 +35,9 @@ export default function TablePropertiesControll({ visible, onPropertyChange, def
   }
 
   function onRemovePropertie(id: string) {
-    setProperties(properties.filter(property => property.id !== id))
+    const newProps = properties.filter(property => property.id !== id)
+    setProperties(newProps)
+    onPropertyChange(newProps)
   }
 
   return (
