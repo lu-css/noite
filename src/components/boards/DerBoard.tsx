@@ -39,6 +39,7 @@ function DerBoard({ flowId }: DerBoardProps) {
 
     storage.getFlow().then((a) => {
       setNodes(buildNodes(a.tables))
+      setEdges(a.edges)
     })
   }, [flowId])
 
