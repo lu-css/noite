@@ -30,7 +30,7 @@ const TableNode = ({ selected, id, dragging, data, xPos, yPos }: NodeProps) => {
 
   const [inputName, setInputName] = useState(data.table ? data.table.name ?? '' : '')
   const [properties, setProperties] = useState<PropertyType[]>(data.table ? data.table.properties ?? [] : [])
-  const [tableColor, setTableColor] = useState(2)
+  const [tableColor, setTableColor] = useState<number>(data.table.color || 0)
 
   const colorLoop = [TABLE_COLOR.violet, TABLE_COLOR.red, TABLE_COLOR.blue, TABLE_COLOR.yellow, TABLE_COLOR.green]
   const colorHoverLoop = [TABLE_COLOR_HOVER.violet, TABLE_COLOR_HOVER.red, TABLE_COLOR_HOVER.blue, TABLE_COLOR_HOVER.yellow, TABLE_COLOR_HOVER.green]
@@ -62,9 +62,9 @@ const TableNode = ({ selected, id, dragging, data, xPos, yPos }: NodeProps) => {
   useEffect(() => {
     const a = properties.map(prop => TablePropertyModel.fromJSON(prop))
 
-    const table = new TableNodeModel(id, inputName, { id: id, data: data, position: { x: xPos, y: yPos }, type: 'table' } satisfies Node, a)
+    const table = new TableNodeModel(id, inputName, { id: id, data: data, position: { x: xPos, y: yPos }, type: 'table' } satisfies Node, a, tableColor)
     data.onTableChange(table)
-  }, [inputName, properties, xPos]);
+  }, [inputName, properties, xPos, tableColor]);
 
   const squareNameClass = `text-center bg-transparent border border-b-0 border-t-0 ${inputName === '' ? ' border-white' : 'border-transparent'}  outline-none text-3x1 text-bold`
 

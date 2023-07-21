@@ -22,7 +22,7 @@ function DerBoard({ flowId }: DerBoardProps) {
     tables.forEach(table => {
       table.node.data.onRemoveNode = onRemoveNode;
       table.node.data.onTableChange = handleTableChange;
-      table.node.data.table = { id: table.id, name: table.name, properties: table.properties }
+      table.node.data.table = { id: table.id, name: table.name, properties: table.properties, color: table.color }
     })
 
     return tables.map(t => t.node)
