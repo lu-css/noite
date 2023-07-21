@@ -52,8 +52,8 @@ const TableNode = ({ selected, id, dragging, data, xPos, yPos }: NodeProps) => {
         minWidth={200}
         minHeight={100} />
       <div className='top-2 h-3 w-[80%]  absolute flex items-center'>
-        {properties.map(_ => (
-          <span className='h-2 w-2 bg-white rounded-full mr-2'></span>
+        {properties.map(property => (
+          <span className={`h-2 w-2 ${property.columnName?.endsWith('_id') ? "bg-yellow-500" : 'bg-white'} rounded-full mr-2`}></span>
         ))}
       </div>
 
