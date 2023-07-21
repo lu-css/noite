@@ -109,9 +109,9 @@ function DerBoard({ flowId }: DerBoardProps) {
         fitView
         onNodesChange={onNodeChange} />
 
-      <Toolbar.Root className='fixed bottom-20 left-1/2 -translate-x-1/2 bg-white brorder rounded-2xl h-20 w-96 border shadow-lg border-zinc-300 px-8 overflow-hidden'>
-        <Toolbar.Button className='w-32 h-32 bg-violet-500 rounded mt-6 transition-transform hover:-translate-y-2 flex align-top justify-center pt-2 text-white' onClick={addSquareNode} >
-          Add Table
+      <Toolbar.Root className='fixed right-10 top-[60px] bg-transparent rounded-2xl h-96 w-20 overflow-hidden flex justify-center py-4 border border-zinc-100 px-2 hover:border-zinc-300'>
+        <Toolbar.Button className='w-32 h-20 opacity-0 bg-violet-500 rounded-full transition-all duration-300 hover:-translate-y-2 text-white flex items-center justify-center px-1 shadow-lg hover:opacity-100' onClick={addSquareNode} >
+          Table
         </Toolbar.Button>
       </Toolbar.Root>
     </div>
