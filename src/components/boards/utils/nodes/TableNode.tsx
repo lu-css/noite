@@ -30,7 +30,7 @@ const TableNode = ({ selected, id, dragging, data, xPos, yPos }: NodeProps) => {
 
   const [inputName, setInputName] = useState(data.table ? data.table.name ?? '' : '')
   const [properties, setProperties] = useState<PropertyType[]>(data.table ? data.table.properties ?? [] : [])
-  const [tableColor, setTableColor] = useState<number>(data.table.color || 0)
+  const [tableColor, setTableColor] = useState<number>(data.table ? data.table.color || 0 : 0)
 
   const colorLoop = [TABLE_COLOR.violet, TABLE_COLOR.red, TABLE_COLOR.blue, TABLE_COLOR.yellow, TABLE_COLOR.green]
   const colorHoverLoop = [TABLE_COLOR_HOVER.violet, TABLE_COLOR_HOVER.red, TABLE_COLOR_HOVER.blue, TABLE_COLOR_HOVER.yellow, TABLE_COLOR_HOVER.green]
