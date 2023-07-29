@@ -90,7 +90,7 @@ const TableNode = ({ selected, id, dragging, data, xPos, yPos }: NodeProps) => {
       </div>
       <div className='top-2 h-3 w-[80%]  absolute flex items-center'>
         {properties.map(property => (
-          <span className={`h-2 w-2 ${property.columnName?.endsWith('_id') ? propertyCircleColor : 'bg-white'} rounded-full mr-2`}></span>
+          <span key={property.id} className={`h-2 w-2 ${property.columnName?.endsWith('_id') ? propertyCircleColor : 'bg-white'} rounded-full mr-2`}></span>
         ))}
       </div>
 
