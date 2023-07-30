@@ -47,29 +47,32 @@ function DerBoard({ flowId }: DerBoardProps) {
     setNodes(nodes =>
       nodes.filter(node => node.id !== id)
     )
+
+    setTables(oldTables =>
+      oldTables.filter(table => table.id !== id)
+    )
   }
 
   function handleTableChange(table: TableNodeModel) {
     setTables(oldTables => {
-      if (oldTables && oldTables.some(t => t.id === table.id)) {
-        const updatedTable = oldTables.map(t => {
-          if (t.id !== table.id) return t
-
-          return table
-        })
-
-        return updatedTable
+      if (!oldTables || !oldTables.some(t => t.id === table.id)) {
+        return [
+          ...oldTables,
+          table
+        ]
       }
 
-      return [
-        ...oldTables,
-        table
-      ]
+      const updatedTable = oldTables.map(t => {
+        if (t.id !== table.id) return t
+
+        return table
+      })
+
+      return updatedTable;
     })
   }
 
   useEffect(() => {
-
     if (tables.length == 0) {
       return
     }
