@@ -1,16 +1,17 @@
 import FlowModel from "@/models/FlowModel"
+import IFlowStorage from "./IFlowStorage"
 
-class FlowStorage {
+class LocalStorage implements IFlowStorage {
   flowId: string
 
   constructor(flowId: string) {
     this.flowId = flowId
   }
 
-  async getFlow(): Promise<FlowModel> {
+  async getFlow(): Promise<FlowModel | null> {
     const storagedItem = localStorage.getItem(this.flowId)
     if (!storagedItem) return new FlowModel([], [])
-    
+
     try {
       const json = await JSON.parse(storagedItem)
 
@@ -34,4 +35,4 @@ class FlowStorage {
   }
 }
 
-export default FlowStorage
+export default LocalStorage

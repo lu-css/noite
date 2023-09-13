@@ -1,5 +1,3 @@
-'use client'
-
 import DerBoard from "@/components/boards/DerBoard";
 import { useRouter } from 'next/router'
 

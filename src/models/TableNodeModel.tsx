@@ -24,7 +24,9 @@ class TableNodeModel {
   })
 
   static fromJSON(json: any) {
+    console.log(json)
     const properties = json.properties.map((prop: any) => TablePropertyModel.fromJSON(prop))
+    console.log(json)
     return new TableNodeModel(json.id, json.name, json.node, properties, json.color)
   }
 }
