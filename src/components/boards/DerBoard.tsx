@@ -1,24 +1,20 @@
 // 'use client'
 
 import { ConnectionMode, Connection, useEdgesState, addEdge, Node, useNodesState } from 'reactflow';
-import { GetServerSideProps } from 'next';
 import { useCallback, useEffect, useState } from 'react';
 import * as Toolbar from '@radix-ui/react-toolbar'
 import DefaultFlow from './utils/flow/DefaultFlow';
 import TableNodeModel from '@/models/TableNodeModel';
-import Localstorage from '@/services/FlowStorage/Localstorage'
-import NoiteAPIStorage from '@/services/FlowStorage/NoiteAPIStorage'
-import IFlowStorage from '@/services/FlowStorage/IFlowStorage'
 
 import 'reactflow/dist/style.css';
 import FlowModel from '@/models/FlowModel';
 
 interface DerBoardProps {
-  flowId: string
+  flow: FlowModel,
+  updateFlow(flow: FlowModel): void
 }
 
 function DerBoard(props: DerBoardProps) {
-  const localstorage = new NoiteAPIStorage();
   function buildNodes(tables: TableNodeModel[]): Node[] {
     if (!tables) {
       return []
@@ -26,7 +22,6 @@ function DerBoard(props: DerBoardProps) {
     tables.forEach(table => {
       table.node.data = {};
       delete table.node.data.onRemoveNode;
-      console.log(table)
       table.node.data.onRemoveNode = onRemoveNode;
       table.node.data.onTableChange = handleTableChange;
       table.node.data.table = { id: table.id, name: table.name, properties: table.properties, color: table.color }
@@ -35,7 +30,6 @@ function DerBoard(props: DerBoardProps) {
     return tables.map(t => t.node)
   }
 
-  // const [localstorage, setLocalstorage] = useState<IFlowStorage>();
   const [nodes, setNodes, onNodeChange] = useNodesState(buildNodes([]));
   const [edges, setEdges, onEdgeChange] = useEdgesState([]);
   const [tables, setTables] = useState<TableNodeModel[]>([])
@@ -43,13 +37,9 @@ function DerBoard(props: DerBoardProps) {
   const onConnect = useCallback((connection: Connection) => setEdges((edges) => addEdge(connection, edges)), [])
 
   useEffect(() => {
-    localstorage.getFlow(props.flowId).then((a) => {
-      if (!a) return []
-
-      setNodes(buildNodes(a.tables))
-      setEdges(a.edges)
-    })
-  }, [props.flowId])
+    setNodes(buildNodes(props.flow.savedNodes))
+    setEdges(props.flow.edges)
+  }, [props])
 
   function onRemoveNode(id: string) {
     setNodes(nodes =>
@@ -85,11 +75,8 @@ function DerBoard(props: DerBoardProps) {
       return
     }
 
-    const f = new FlowModel(tables, edges)
-    if (!localstorage)
-      console.error("Localstorage connection unsuccessful");
-    else
-      localstorage.saveFlow(props.flowId,f)
+    const f = new FlowModel(props.flow.id, props.flow.name, tables, edges)
+    props.updateFlow(f);
 
   }, [tables, edges])
 
@@ -129,11 +116,6 @@ function DerBoard(props: DerBoardProps) {
       </Toolbar.Root>
     </div>
   );
-}
-
-export async function getServerSideProps({ flowId }: DerBoardProps) {
-  console.log("FLOW ID AE", flowId);
-  return { props: { flowId } };
 }
 
 export default DerBoard;

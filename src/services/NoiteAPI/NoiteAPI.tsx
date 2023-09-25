@@ -2,6 +2,7 @@ import FlowModel from "@/models/FlowModel";
 import INotieAPI from "./INoiteAPI";
 import axios from "axios";
 import TableNodeModel from "@/models/TableNodeModel";
+import TableNode from "@/components/boards/utils/nodes/TableNode";
 
 class NoiteAPI implements INotieAPI {
   jwtToken: string;
@@ -17,7 +18,7 @@ class NoiteAPI implements INotieAPI {
       }
     }
 
-    const tables = flow.tables;
+    const tables = flow.asJson().tables;
     const body = tables.map((table: TableNodeModel) => ({
       id: table.id,
       name: table.name,
@@ -40,11 +41,8 @@ class NoiteAPI implements INotieAPI {
       }
     }))
 
-    console.log(body)
-
     const url = `${this.BASEURL}/api/Flow/${flowId}`;
     const response = await axios.put(url, body, requestConfig)
-    console.log(response);
   }
 
   BASEURL = process.env.NOITE_API_URL ?? "http://localhost:5204";
@@ -60,21 +58,30 @@ class NoiteAPI implements INotieAPI {
     const response = await axios.get(url, requestConfig)
 
     try {
-      console.log(response.data.savedNodes);
-      const tables = response.data.savedNodes.map((json: any) => TableNodeModel.fromJSON(json));
-      console.log(tables);
-      return new FlowModel(tables, [])
+      return FlowModel.fromJson(response.data);
     } catch (error) {
       console.log(error)
       return null;
     }
   }
-  myFlows(): FlowModel[] {
-    throw new Error("Method not implemented.");
+  async myFlows(): Promise<FlowModel[]> {
+    const requestConfig = {
+      headers: {
+        Authorization: "Bearer " + this.jwtToken
+      }
+    }
+
+    const url = `${this.BASEURL}/api/Flow/MyFlows`;
+    const response = await axios.get(url, requestConfig)
+    const body: any[] = response.data;
+
+    return body.map(b => FlowModel.fromJson(b))
   }
+
   createFlow(): FlowModel {
     throw new Error("Method not implemented.");
   }
+
   async register(userName: string, email: string, password: string): Promise<string> {
     throw new Error("Method not implemented.");
     return "";

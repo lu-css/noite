@@ -31,7 +31,7 @@ export default function DefaultFlow({ setEdges, nodes, edges, onConnect, onEdges
   }, []);
 
   return (
-    <div className='w-screen h-screen'>
+    <div className='w-full h-full'>
       <ReactFlow
         nodeTypes={NODE_TYPES}
         nodes={nodes}

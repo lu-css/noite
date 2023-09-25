@@ -2,27 +2,33 @@ import { Edge } from "reactflow";
 import TableNodeModel from "./TableNodeModel";
 
 class FlowModel {
-  tables: TableNodeModel[]
+  id: string
+  name: string
+  savedNodes: TableNodeModel[]
   edges: Edge<any>[]
 
-  constructor(tables: TableNodeModel[], edges: Edge<any>[]) {
-    this.tables = tables;
+  constructor(id: string, name: string, savedNodes: TableNodeModel[], edges: Edge<any>[]) {
+    this.id = id;
+    this.name = name;
+    this.savedNodes = savedNodes;
     this.edges = edges
   }
 
 
   asJson() {
     return {
-      tables: this.tables,
+      tables: this.savedNodes,
       edges: this.edges
     }
   }
 
   static fromJson(json: any) {
-    const tables = json.tables.map((table: any) => TableNodeModel.fromJSON(table))
+    const tables = json.savedNodes.map((table: any) => TableNodeModel.fromJSON(table))
     console.log(tables)
     const edges = json.edges
-    return new FlowModel(tables, edges)
+    const name = json.name
+    const id = json.id
+    return new FlowModel(id, name, tables, edges)
   }
 }
 
