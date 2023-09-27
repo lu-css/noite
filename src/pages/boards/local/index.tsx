@@ -56,13 +56,13 @@ export default function Index() {
   return (
     <div className="w-screen h-screen flex row-auto" >
       <div>
-        <a
+        <p
           onClick={() => setFlow(undefined)}
-        >Open new File</a>
+        >Open new File</p>
         <br />
         <br />
-        <a
-          onClick={() => saveNodes()}>Save</a>
+        <p
+          onClick={() => saveNodes()}>Save</p>
       </div>
       <div className="w-full h-full">
         <DerBoard flow={flow} updateFlow={updateNode} />

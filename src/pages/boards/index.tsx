@@ -1,8 +1,10 @@
+import Link from "next/link";
+
 export default function Index(){
   return (
     <>
       <h1>Start a project</h1>
-      <a href="/boards/local">Local</a>
+      <Link href="/boards/local">Local</Link>
     </>
   )
 }

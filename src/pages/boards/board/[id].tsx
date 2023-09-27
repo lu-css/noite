@@ -3,6 +3,7 @@ import type { GetServerSideProps, InferGetStaticPropsType } from 'next'
 import DerBoard from "@/components/boards/DerBoard";
 import FlowModel from "@/models/FlowModel";
 import NoiteAPI from "@/services/NoiteAPI/NoiteAPI";
+import Link from 'next/link';
 
 type BoardProps = {
   flow: FlowModel
@@ -23,7 +24,7 @@ export default function Index(props: InferGetStaticPropsType<typeof getServerSid
   return (
     <div className="w-screen h-screen flex row-auto" >
       <div>
-        <a href="/boards/myboards">Back to Flows</a>
+        <Link href="/boards/myboards">Back to Flows</Link>
       </div>
       <div className="w-full h-full">
         <DerBoard flow={props.flow} updateFlow={updateNode} />
