@@ -11,7 +11,23 @@ interface TablePropertiesProp {
 export default function TablePropertiesControll({ visible, onPropertyChange, defaultProperties }: TablePropertiesProp) {
   const canView = visible ? visible : false
 
-  const [properties, setProperties] = useState<PropertyType[]>(defaultProperties || [])
+  const [properties, setProperties] = useState<PropertyType[]>(sortArrayToid(defaultProperties || []))
+
+  function sortArrayToid(arr: PropertyType[]): PropertyType[] {
+    if(!arr) return []
+
+    return arr.sort((a, b) => {
+      if (a.columnName?.endsWith("_id") && !b.columnName?.endsWith("_id")) {
+        return 1;
+      }
+
+      if (!a.columnName?.endsWith("_id") && b.columnName?.endsWith("_id")) {
+        return -1;
+      }
+
+      return 0;
+    });
+  }
 
   function handleAddProp() {
     setProperties(prevElement => [
@@ -19,7 +35,6 @@ export default function TablePropertiesControll({ visible, onPropertyChange, def
       { id: crypto.randomUUID() }
     ])
     onPropertyChange(properties)
-    const lastPropertie = properties[properties.length - 1]
   }
 
   function handlePropertyChange(change: PropertyType) {
@@ -30,7 +45,10 @@ export default function TablePropertiesControll({ visible, onPropertyChange, def
       return { id: property.id, columnName: change.columnName, columnType: change.columnType } satisfies PropertyType
     })
 
-    setProperties(updatedProperties)
+    updatedProperties.forEach(a => {
+      console.log(a.columnName)
+    })
+    setProperties(sortArrayToid(updatedProperties))
     onPropertyChange(properties)
   }
 
