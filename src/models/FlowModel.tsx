@@ -23,8 +23,7 @@ class FlowModel {
   }
 
   static fromJson(json: any) {
-    const tables = json.savedNodes.map((table: any) => TableNodeModel.fromJSON(table))
-    console.log(tables)
+    const tables = json.savedNodes?.map((table: any) => TableNodeModel.fromJSON(table)) ?? json.tables.map((table: any) => TableNodeModel.fromJSON(table))
     const edges = json.edges
     const name = json.name
     const id = json.id
