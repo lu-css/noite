@@ -10,22 +10,28 @@ export default function Index() {
 
   if (!flow) {
     return (
-      <input
-        type='file'
-        accept='.json'
-        placeholder='Submit a file'
-        onChange={async (e) => {
-          const f = e.target.files?.[0];
+      <>
+        <button
+          onClick={() => {
+            setFlow(new FlowModel("", "", [], []))
+          }}> Create a Empty Flow</button>
+        <input
+          type='file'
+          accept='.json'
+          placeholder='Submit a file'
+          onChange={async (e) => {
+            const f = e.target.files?.[0];
 
-          if (!f) { return }
+            if (!f) { return }
 
-          const bytes = await f.arrayBuffer();
-          const buffer = Buffer.from(bytes);
-          const content = JSON.parse(buffer.toString());
+            const bytes = await f.arrayBuffer();
+            const buffer = Buffer.from(bytes);
+            const content = JSON.parse(buffer.toString());
 
-          setFlow(FlowModel.fromJson(content));
-        }}
-      />
+            setFlow(FlowModel.fromJson(content));
+          }}
+        />
+      </>
     )
   }
 
