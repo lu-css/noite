@@ -1,5 +1,4 @@
 import type { GetServerSideProps, InferGetStaticPropsType } from 'next'
-
 import DerBoard from "@/components/boards/DerBoard";
 import FlowModel from "@/models/FlowModel";
 import NoiteAPI from "@/services/NoiteAPI/NoiteAPI";
