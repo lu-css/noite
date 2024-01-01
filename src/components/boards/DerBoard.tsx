@@ -2,7 +2,7 @@
 
 import { ConnectionMode, Connection, useEdgesState, addEdge, Node, useNodesState } from 'reactflow';
 import { useCallback, useEffect, useState } from 'react';
-import * as Toolbar from '@radix-ui/react-toolbar'
+import * as Toolbar from '@radix-ui/react-toolbar';
 import DefaultFlow from './utils/flow/DefaultFlow';
 import TableNodeModel from '@/models/TableNodeModel';
 
