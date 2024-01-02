@@ -98,7 +98,7 @@ function DerBoard(props: DerBoardProps) {
 
 
   return (
-    <div className='w-full h-full bg-white'>
+    <div className='w-full h-full bg-gray-900/60'>
       <DefaultFlow
         setEdges={setEdges}
         nodes={nodes}
