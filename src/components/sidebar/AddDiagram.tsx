@@ -1,23 +1,40 @@
+'use client'
+
 import { FaPlus } from "react-icons/fa";
-import React, { useState } from "react";
+import React, { useState, useEffect, useRef  } from "react";
 import { Item } from "./sidebarItem";
 import { BsFillDiagram3Fill } from "react-icons/bs";
 import { BsHddNetwork } from "react-icons/bs";
 
 export const AddDiagram = () => {
+  const modalRef = useRef<HTMLDialogElement>(null);
   const [modalOpen, setModalOpen] = useState(false);
 
-  const openModal = () => setModalOpen(true);
-  const closeModal = () => setModalOpen(false);
+  useEffect(() => {
+    const myDialog = modalRef.current;
+
+    if (myDialog && modalOpen) {
+      myDialog.showModal();
+    }
+  }, [modalOpen]);
+
+  const openModal = () => {
+    setModalOpen(true);
+  };
+
+  const closeModal = () => {
+    setModalOpen(false);
+  };
+
   return (
     <div className="flex relative justify-center items-center">
-      <a
-        onClick={() => document.getElementById("my_modal_3")?.showModal()}
+      <button
+        onClick={openModal}
         className="flex z-[2] justify-center w-full rounded-md hover:bg-blue-600/90 transition-all cursor-pointer bg-blue-500/90 gap-4 items-center py-4 "
       >
        <FaPlus className='text-xl'></FaPlus>Novo Diagrama{" "}
-      </a>
-      <dialog id="my_modal_3" className="modal">
+      </button>
+      <dialog ref={modalRef} id="my_modal_3" className="modal">
         <div className="modal-box">
           <form method="dialog">
             <button className="btn btn-sm btn-circle btn-ghost absolute right-2 top-2">
