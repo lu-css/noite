@@ -17,7 +17,7 @@ import { useState } from 'react';
 export const Sidebar = ( )=>{
     return(
         
-        <div className=" min-h-screen h-full py-6 px-4 flex flex-col gap-6 relative top-0 left-0 w-[325px] bg-gray-800/60 ">
+        <div className=" min-h-screen h-full py-6 px-4 flex flex-col gap-6 relative top-0 left-0 w-[360px] bg-gray-800/60 ">
             <User></User>
            <AddDiagram></AddDiagram>
            <DividerLine></DividerLine>
