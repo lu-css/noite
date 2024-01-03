@@ -8,6 +8,7 @@ import TableNodeModel from '@/models/TableNodeModel';
 
 import 'reactflow/dist/style.css';
 import FlowModel from '@/models/FlowModel';
+import { FaPlus } from 'react-icons/fa';
 
 interface DerBoardProps {
   flow: FlowModel,
@@ -98,7 +99,7 @@ function DerBoard(props: DerBoardProps) {
 
 
   return (
-    <div className='w-full h-full bg-white'>
+    <div className='w-full h-full bg-gray-900/60'>
       <DefaultFlow
         setEdges={setEdges}
         nodes={nodes}
@@ -109,9 +110,9 @@ function DerBoard(props: DerBoardProps) {
         fitView
         onNodesChange={onNodeChange} />
 
-      <Toolbar.Root className='fixed right-10 top-[60px] bg-transparent rounded-2xl h-96 w-20 overflow-hidden flex justify-center py-4 border border-zinc-100 px-2 hover:border-zinc-300'>
-        <Toolbar.Button className='w-32 h-20 opacity-0 bg-violet-500 rounded-full transition-all duration-300 hover:-translate-y-2 text-white flex items-center justify-center px-1 shadow-lg hover:opacity-100' onClick={addSquareNode} >
-          Table
+      <Toolbar.Root className='fixed right-10 top-[70px] bg-transparent rounded-2xl h-96 w-32 overflow-hidden flex justify-center border-[2px] border-zinc-100/10'>
+        <Toolbar.Button className='w-full h-12  bg-violet-500 gap-2 px-2  text-white flex items-center justify-center shadow-lg' onClick={addSquareNode} >
+        <FaPlus className='text-sm'></FaPlus> Nova Tabela 
         </Toolbar.Button>
       </Toolbar.Root>
     </div>
