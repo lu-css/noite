@@ -111,9 +111,8 @@ function DerBoard(props: DerBoardProps) {
         onNodesChange={onNodeChange} />
 
       <Toolbar.Root className='fixed right-10 top-[70px] bg-transparent rounded-2xl h-96 w-32 overflow-hidden flex justify-center border-[2px] border-zinc-100/10'>
-        <Toolbar.Button className='w-full h-12  bg-violet-500 gap-2 px-2  text-white flex items-center justify-center shadow-lg' onClick={addSquareNode} >
-        <FaPlus className='text-sm'></FaPlus> Nova Tabela 
-        </Toolbar.Button>
+        <Toolbar.Button className='w-full h-12  bg-violet-500 gap-2 px-2 text-sm hover:bg-violet-500/80 transition-all  text-white flex items-center justify-center shadow-lg' onClick={addSquareNode} >
+        <FaPlus></FaPlus> Nova Tabela</Toolbar.Button>
       </Toolbar.Root>
     </div>
   );

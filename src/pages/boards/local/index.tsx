@@ -127,11 +127,11 @@ export default function Index() {
   }
 
   return (
-    <div className="w-screen h-screen flex " >
-      <div>
+    <div className=" h-screen flex " >
+      <div className='max-h-screen w-full absolute flex'>
         
        
-        <div className={`min-h-screen h-full z-10 py-6 px-4 flex flex-col gap-6 relative top-0 left-0 w-[350px] bg-[#131921] ${isSidebarVisible ? '' : 'hidden'}`}>
+        <div className={`min-h-screen h-full z-10 py-6 px-4 flex flex-col gap-6 absolute top-0 left-0 w-[360px] bg-[#131921] ${isSidebarVisible ? '' : 'hidden'}`}>
             <User></User>
             <a className='flex gap-3 items-center' href='../boards/'><MdKeyboardArrowLeft></MdKeyboardArrowLeft>Voltar</a>
             <div className="flex flex-col gap-4">
@@ -141,21 +141,32 @@ export default function Index() {
               <input type='text' 
            value={flowName}
           onChange={handleInputChange} 
-          className='flex justify-center gap-4 items-center py-4 bg-transparent outline-none px-2 ring-2 ring-gray-600/10 rounded-md w-full' 
+          className='flex justify-center gap-4 items-center py-4 bg-transparent outline-none px-6 ring-2 ring-gray-600/10 hover:ring-gray-600/20 focus:ring-gray-600/40 transition-all rounded-md w-full' 
           placeholder='Exemplo: MeuDiagrama'
           maxLength={35}
           >
           </input>
           
               </div>
+              <DividerLine></DividerLine>
             <button className='flex justify-center w-full rounded-md hover:bg-blue-600/90 transition-all cursor-pointer bg-blue-500/90 gap-4 items-center py-4'
           onClick={() => {
             setFlow(new FlowModel("", "", [], [])), {handleCreateEmptyDiagram}
-          }}> <PiNoteBlank className='text-2xl' />
-          Criar Diagrama Vazio</button>
+          }}> 
+          
+          <div className='w-[190px] flex justify-start gap-3'><PiNoteBlank className='text-2xl' />Criar Diagrama Vazio</div>
+          
+          </button>
 
-          <input
-          className="file-input file-input-bordered w-full max-w-xs h-[56px]"
+          
+           <a className="flex  justify-center w-full rounded-md hover:bg-violet-600/60 transition-all cursor-pointer bg-violet-500/70 gap-4 items-center py-4 " onClick={() => saveNodes()}>
+            
+           <div className='w-[190px] flex justify-start gap-3'><IoIosSave className='text-2xl' /> Salvar Diagrama</div>
+        
+        </a>
+
+           <input
+          className="file-input file-input-bordered w-full  h-[56px]"
           type='file'
           accept='.json'
           placeholder='Submit a file'
@@ -171,7 +182,6 @@ export default function Index() {
             setFlow(FlowModel.fromJson(content));
           }}
         />
-           <a className="flex  justify-center w-full rounded-md hover:bg-violet-600/60 transition-all cursor-pointer bg-violet-500/70 gap-4 items-center py-4 " onClick={() => saveNodes()}><IoIosSave className='text-2xl' /> Salvar Arquivo </a> 
             </div>
            <DividerLine></DividerLine>
            <div className='flex mt-[-1.5rem] flex-col w-full'>
@@ -191,14 +201,14 @@ export default function Index() {
             link='/'
             ></Item>
             <DividerLine></DividerLine>
-            <Upgrade></Upgrade>
+
             </div>
         </div>  
        
         
        
 
-      </div> <button onClick={toggleSidebar} className="fixed top-2 w-[80px] h-[40px] flex items-center justify-center z-10 right-10 p-2 bg-gray-600/70 text-white rounded-full focus:outline-none">
+      </div> <button onClick={toggleSidebar} className="fixed top-4 w-32 h-[40px] flex items-center justify-center z-10 right-10 p-2 bg-gray-600/60 transition-all hover:bg-gray-600/70 text-white rounded-md focus:outline-none">
         {isSidebarVisible ? 'Esconder' : 'Mostrar'}
       </button>
       
@@ -206,7 +216,9 @@ export default function Index() {
      
         <DerBoard flow={flow} updateFlow={updateNode} />
       </div>
+      
     </div >
+    
   )
 }
 
